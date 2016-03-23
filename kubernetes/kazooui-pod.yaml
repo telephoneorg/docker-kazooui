@@ -1,0 +1,40 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: kazooui
+  labels:
+    app: kazooui
+    project: valuphone
+    role: user-interface
+spec:
+  containers:
+    - name: kazooui
+      image: callforamerica/kazooui
+      imagePullPolicy: Always
+      ports:
+        - name: http
+          protocol: TCP
+          containerPort: 80
+        - name: https
+          protocol: TCP
+          containerPort: 443
+      resources:
+        requests:
+          cpu: 1
+          memory: 1G
+        limits:
+          cpu: 1
+          memory: 1G 
+      # readinessProbe:
+      #   httpGet:
+      #     path: /monster-ui
+      #     port: 80
+      #   initialDelaySeconds: 15
+      #   timeoutSeconds: 3
+      # livenessProbe:
+      #   httpGet:
+      #     path: /monster-ui
+      #     port: 80
+      #   initialDelaySeconds: 15
+      #   timeoutSeconds: 3
+  restartPolicy: Always

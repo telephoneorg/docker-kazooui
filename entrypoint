@@ -70,6 +70,6 @@ rm -f /var/run/httpd/httpd.pid
 # fi
 
 cd ~
-    echo "Starting Monster-UI ..."
+    echo "Starting Kazoo-UI ..."
     exec httpd -f /etc/httpd/conf/httpd.conf -e $HTTPD_LOGLEVEL -DFOREGROUND
 

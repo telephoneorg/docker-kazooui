@@ -1,0 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata: 
+  name: kazooui
+  labels:
+    app: kazooui
+    project: valuphone
+    role: user-interface
+spec:
+  selector:
+    app: kazooui
+    project: valuphone
+  type: NodePort
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      nodePort: 81
+    - name: https
+      protocol: TCP
+      port: 443
+      nodePort: 444
