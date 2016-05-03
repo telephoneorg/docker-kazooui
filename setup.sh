@@ -100,7 +100,7 @@ tee /var/www/html/kazoo-ui/config/config.js <<'EOF'
         /* Was winkstart.debug */
         debug: false,
 
-        ws_server: 'wss://IP_OF_KAMAILIO:8080',
+        ws_server: 'wss://ws.valuphone.com:8080',
 
         advancedView: false,
 
@@ -108,7 +108,7 @@ tee /var/www/html/kazoo-ui/config/config.js <<'EOF'
         register_type: 'onboard',
 
         /* Do you want the signup button or not ? default to false if not set */
-        hide_registration: false,
+        hide_registration: true,
 
         onboard_roles: {
             'default': {
@@ -222,10 +222,10 @@ tee /var/www/html/kazoo-ui/config/config.js <<'EOF'
         device_threshold: [5, 20, 50, 100],
 
         /* web server used by the cdr module to show the link to the logs */
-        logs_web_server_url: 'http://cdrs.2600hz.com/',
+        logs_web_server_url: 'http://cdrs.valuphone.com/',
 
         /* Customized name displayed in the application (login page, resource module..) */
-        company_name: '2600hz',
+        company_name: 'valuphone',
 
         base_urls: {
             'u.2600hz.com': {
@@ -239,8 +239,8 @@ tee /var/www/html/kazoo-ui/config/config.js <<'EOF'
 
         /* Was winkstart.realm_suffix */
         realm_suffix: {
-            login: '.sip.2600hz.com',
-            register: '.trial.2600hz.com'
+            login: '.sip.valuphone.com',
+            register: '.trial.valuphone.com'
         },
 
         /* What applications is available for a user that just registered */
@@ -248,28 +248,28 @@ tee /var/www/html/kazoo-ui/config/config.js <<'EOF'
             cluster: {
                label: 'Cluster Manager',
                icon: 'cluster_manager',
-               api_url: 'http://plasma.valuphone.com:8000/v1' //'http://plasma.valuphone.com:8000/v1'
+               api_url: 'https://api.valuphone.com:8443/v1'
             },
             voip: {
                 label: 'Trial PBX',
                 icon: 'phone',
-                api_url: 'http://plasma.valuphone.com:8000/v1' //'http://plasma.valuphone.com:8000/v1'
+                api_url: 'https://api.valuphone.com:8443/v1'
             },
             accounts: {
                 label: 'Accounts',
                 icon: 'account',
-                api_url: 'http://plasma.valuphone.com:8000/v1' //'http://plasma.valuphone.com:8000/v1'
+                api_url: 'https://api.valuphone.com:8443/v1'
             }
         },
 
         /* Custom links */
         nav: {
-            help: 'http://wiki.2600hz.com',
-            learn_more: 'http://www.2600hz.com/'
+            help: 'http://help.valuphone.com',
+            learn_more: 'http://www.valuphone.com/'
         },
 
-        default_api_url: 'http://plasma.valuphone.com:8000/v1', //'http://plasma.valuphone.com:8000/v1',
-        default_api_v2_url: 'http://plasma.valuphone.com:8000/v2',
+        default_api_url: 'https://api.valuphone.com:8443/v1',
+        default_api_v2_url: 'http://api.valuphone.com:8443/v2',
 
         available_apps: {
             'voip': {
@@ -325,7 +325,7 @@ tee /var/www/html/kazoo-ui/config/config.js <<'EOF'
 
     winkstart.apps = {
         'auth' : {
-            api_url: 'http://plasma.valuphone.com:8000/v1' //'http://plasma.valuphone.com:8000/v1',
+            api_url: 'https://api.valuphone.com:8443/v1',
             /* These are some settings that are set automatically. You are free to override them here.
             account_id: null,
             auth_token: null,
