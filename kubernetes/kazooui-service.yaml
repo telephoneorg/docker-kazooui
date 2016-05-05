@@ -10,7 +10,6 @@ spec:
   selector:
     app: kazooui
     project: valuphone
-  # type: NodePort
   ports:
     - name: http
       protocol: TCP

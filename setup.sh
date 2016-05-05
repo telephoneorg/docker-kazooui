@@ -31,6 +31,9 @@ yum -y install httpd
 echo "Fixing logs for docker ..."
 sed -ri 's!^(\s*CustomLog)\s+\S+!\1 /proc/self/fd/1!g; s!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g;' /etc/httpd/conf/httpd.conf
 
+# Disable directory listings
+sed -ri 's/ Indexes / -Indexes /g' /etc/httpd/conf/httpd.conf
+
 mkdir -p /var/run/httpd
 
 
