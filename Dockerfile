@@ -1,4 +1,4 @@
-FROM centos:6
+FROM    centos:6
 
 MAINTAINER joe <joe@valuphone.com>
 
@@ -7,7 +7,9 @@ LABEL   os="linux" \
         os.version="6"
 
 LABEL   image.name="kazoo-ui" \
-        image.version="1"
+        image.version="3.22"
+
+ENV     KAZOO_UI_VERSION=3.22
 
 ENV     TERM=xterm
 
@@ -17,12 +19,13 @@ RUN     /tmp/setup.sh
 COPY    entrypoint /usr/bin/entrypoint
 
 ENV     HOME=/var/www \
-        PATH=/var/www/bin:$PATH \
-        KUBERNETES_HOSTNAME_FIX=true
+        PATH=/var/www/bin:$PATH
 
-VOLUME  ["/var/www/html/kazoo-ui"]
+ENV     HTTPD_LOG_LEVEL=error
 
-EXPOSE  80 443
+EXPOSE  80
+
+VOLUME  ["/var/www/html"]
 
 # USER    apache
 

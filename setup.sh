@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 KAZOO_RELEASE=R15B
 
 # add 2600hz yum repos
@@ -19,7 +20,7 @@ cat <<-EOF > /etc/yum.repos.d/2600hz.repo
 EOF
 
 
-echo -e "Creating user and group for bigcouch ..."
+echo -e "Creating user and group for apache ..."
 groupadd -g 48 -r apache
 useradd -u 48 --home-dir /var/www --shell /bin/bash --comment 'Apache User' -g apache apache
 
@@ -41,61 +42,17 @@ echo "Installing Monster-ui ..."
 yum -y install kazoo-ui
 
 
+echo "Fixing kazoo-ui path ..."
+mv /var/www/html/kazoo-ui/* /var/www/html/
+
+
 echo "Installing extras ..."
 yum -y install bind-utils
 
-echo "Installing JQ ..."
-curl -o /usr/local/bin/jq -sSL https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
-chmod +x /usr/local/bin/jq
 
-
-# In the future, install other monster-ui components here #
-
-
-echo "Writing Hostname override fix ..."
-tee /usr/local/bin/hostname-fix <<'EOF'
-#!/bin/bash
-
-fqdn() {
-	local IP=$(/bin/hostname -i | sed 's/\./-/g')
-	local DOMAIN='default.pod.cluster.local'
-	echo "${IP}.${DOMAIN}"
-}
-
-short() {
-	local IP=$(/bin/hostname -i | sed 's/\./-/g')
-	echo $IP
-}
-
-ip() {
-	/bin/hostname -i
-}
-
-if [[ "$1" == "-f" ]]; then
-	fqdn
-elif [[ "$1" == "-s" ]]; then
-	short
-elif [[ "$1" == "-i" ]]; then
-	ip
-else
-	short
-fi
-EOF
-chmod +x /usr/local/bin/hostname-fix
-
-echo "Writing .bashrc ..."
-tee ~/.bashrc <<'EOF'
-#!/bin/bash
-
-if [ "$KUBERNETES_HOSTNAME_FIX" == true ]; then
-	export HOSTNAME=$(hostname -f)
-fi
-EOF
-chown apache:apache ~/.bashrc
-
-rm -f /var/www/html/kazoo-ui/config/config.js 
+rm -f /var/www/html/config/config.js 
 echo "Writing config.js ..."
-tee /var/www/html/kazoo-ui/config/config.js <<'EOF'
+tee /var/www/html/config/config.js <<'EOF'
 //window.translate = [];
 ( function(winkstart, amplify, $) {
 

@@ -1,75 +1,13 @@
 #!/bin/bash
 
-# HTTPD_USER=${HTTPD_USER:-apache}
-# HTTPD_GROUP=${HTTPD_GROUP:-apache}
+
 HTTPD_LANG=${HTTPD_LANG-"C"}
-HTTPD_LOGLEVEL=${HTTPD_LOGLEVEL:-info}
+HTTPD_LOG_LEVEL=${HTTPD_LOGLEVEL:-info}
 
-# MONSTERUI_ENABLE_SMARTPBX_CALLFLOWS=${MONSTERUI_ENABLE_SMARTPBX_CALLFLOWS:-true}
-# MONSTERUI_DISABLE_BRAINTREE=${MONSTERUI_DISABLE_BRAINTREE:-true}
-
-# get_nodeport_for() {
-#     local SERVICE=$1
-#     local API_URL=$(dig +short +search kubernetes)
-#     local SERVICES_URL="https://$API_URL/api/v1/services"
-#     local API_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
-#     local NODEPORT=$(curl -sSLk -H "Authorization: Bearer $API_TOKEN" $SERVICES_URL | jq -r ".items[] | select(.metadata.name == \"${SERVICE}\") | .spec.ports[0].nodePort")
-#     echo -n $NODEPORT
-# }
-
-# get_crossbar_api_uri_esc() {
-#     local PORT=$(get_nodeport_for 'whapps')
-#     # [fixme] change this to the load balancer
-#     local ADDR='adeno.valuphone.com'
-#     local ADDR_ESC=$(echo $ADDR | sed 's/\./\\\./g')
-#     echo "http:\/\/${ADDR_ESC}:${PORT}\/v2\/"
-# }
-
-# rewrite_crossbar_api_url() {
-#     local ADDR_ESC=$(get_crossbar_api_uri_esc)
-#     sed -ir "s/\(default: '\)\(.*\)\('\)/\1${ADDR_ESC}\3/" /var/www/html/monster-ui/js/config.js
-# }
-
-# rewrite_application_title() {
-#     local MONSTERUI_APPTITLE=${MONSTERUI_APPTITLE:-Valuphone}
-#     local MONSTERUI_APPTITLE_ESC=$(echo $MONSTERUI_APPTITLE | sed 's/\./\\\./g')
-#     sed -ir "s/\(applicationTitle: '\)\(.*\)\(',\)/\1${MONSTERUI_APPTITLE_ESC}\3/" /var/www/html/monster-ui/js/config.js
-# }
-
-# rewrite_call_report_email() {
-#     local MONSTERUI_REPORT_EMAIL=${MONSTERUI_REPORT_EMAIL:-support@valuphone.com}
-#     local MONSTERUI_REPORT_EMAIL_ESC=$(echo $MONSTERUI_REPORT_EMAIL | sed 's/\./\\\./g')
-#     sed -ir "s/\(callReportEmail: '\)\(.*\)\(',\)/\1${MONSTERUI_REPORT_EMAIL_ESC}\3/" /var/www/html/monster-ui/js/config.js
-# }
-
-# rewrite_company_name() {
-#     local MONSTERUI_COMPANY_NAME=${MONSTERUI_COMPANY_NAME:-Valuphone}
-#     local MONSTERUI_COMPANY_NAME_ESC=$(echo $MONSTERUI_COMPANY_NAME | sed 's/\./\\\./g')
-#     sed -ir "s/\(companyName: '\)\(.*\)\(',\)/\1${MONSTERUI_COMPANY_NAME_ESC}\3/" /var/www/html/monster-ui/js/config.js
-# }
 
 # Apache gets grumpy about PID files pre-existing
 rm -f /var/run/httpd/httpd.pid 
 
-
-# echo "Rewriting monster-ui config.js ..."
-# rewrite_crossbar_api_url
-# rewrite_application_title
-# rewrite_call_report_email
-# rewrite_company_name
-
-
-# if [ $MONSTERUI_ENABLE_SMARTPBX_CALLFLOWS ]; then
-#     # enable pbx callflows in callflows app
-#     sed -ir 's/\/\/ \(showSmartPBXCallflows\)/\1/' /var/www/html/monster-ui/js/config.js
-# fi
-
-# if [ $MONSTERUI_DISABLE_BRAINTREE ]; then
-#     # disable braintree
-#     sed -ir 's/\/\/ \(disableBraintree\)/\1/' /var/www/html/monster-ui/js/config.js
-# fi
-
 cd ~
     echo "Starting Kazoo-UI ..."
-    exec httpd -f /etc/httpd/conf/httpd.conf -e $HTTPD_LOGLEVEL -DFOREGROUND
-
+    exec httpd -f /etc/httpd/conf/httpd.conf -e $HTTPD_LOG_LEVEL -DFOREGROUND
