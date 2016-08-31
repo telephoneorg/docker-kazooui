@@ -12,7 +12,6 @@ spec:
         project: valuphone
         environment: production
     spec:
-      minReadySeconds: 60
       containers:
         - name: kazooui
           image: callforamerica/kazooui
@@ -34,7 +33,7 @@ spec:
             httpGet:
               path: /
               port: 80
-            initialDelaySeconds: 30
+            initialDelaySeconds: 5
             timeoutSeconds: 15
           livenessProbe:
             httpGet:
