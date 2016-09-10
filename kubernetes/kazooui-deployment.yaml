@@ -18,6 +18,8 @@ spec:
           env:
             - name: HTTPD_LOG_LEVEL
               value: error
+            - name: CROSSBAR_URI
+              value: https://api.valuphone.com
           ports:
             - name: http
               protocol: TCP

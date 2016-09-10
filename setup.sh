@@ -208,17 +208,17 @@ tee /var/www/html/config/config.js <<'EOF'
             cluster: {
                label: 'Cluster Manager',
                icon: 'cluster_manager',
-               api_url: 'https://api.valuphone.com:8443/v1'
+               api_url: 'https://api.valuphone.com/v1'
             },
             voip: {
                 label: 'Trial PBX',
                 icon: 'phone',
-                api_url: 'https://api.valuphone.com:8443/v1'
+                api_url: 'https://api.valuphone.com/v1'
             },
             accounts: {
                 label: 'Accounts',
                 icon: 'account',
-                api_url: 'https://api.valuphone.com:8443/v1'
+                api_url: 'https://api.valuphone.com/v1'
             }
         },
 
@@ -228,8 +228,8 @@ tee /var/www/html/config/config.js <<'EOF'
             learn_more: 'http://www.valuphone.com/'
         },
 
-        default_api_url: 'https://api.valuphone.com:8443/v1',
-        default_api_v2_url: 'http://api.valuphone.com:8443/v2',
+        default_api_url: 'https://api.valuphone.com/v1',
+        default_api_v2_url: 'http://api.valuphone.com/v2',
 
         available_apps: {
             'voip': {
@@ -285,7 +285,7 @@ tee /var/www/html/config/config.js <<'EOF'
 
     winkstart.apps = {
         'auth' : {
-            api_url: 'https://api.valuphone.com:8443/v1',
+            api_url: 'https://api.valuphone.com/v1',
             /* These are some settings that are set automatically. You are free to override them here.
             account_id: null,
             auth_token: null,

@@ -3,9 +3,8 @@
 
 HTTPD_LANG=${HTTPD_LANG-"C"}
 HTTPD_LOG_LEVEL=${HTTPD_LOGLEVEL:-info}
+: ${CROSSBAR_URI:=https://api.valuphone.com}
 
-
-# Apache gets grumpy about PID files pre-existing
 rm -f /var/run/httpd/httpd.pid 
 
 cd ~
